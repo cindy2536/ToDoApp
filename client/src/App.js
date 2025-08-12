@@ -8,9 +8,12 @@ function App() {
   //State variable to store the list of todo items
   const [todoItems, setTodoItems] = useState([]);
 
+
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+  
   //Fetch initial todo items from server on first component mount
   useEffect(() => {
-    fetch('http://localhost:5000/api/todos')
+    fetch('${API_BASE_URL}/todos')
       //Check HTTP status code before parsing JSON to catch server errors like 404 or 500
       .then(res => {
         if (!res.ok) {
@@ -30,7 +33,7 @@ function App() {
 
     try {
       //Send POST request to server to create a new todo
-      const res = await fetch('http://localhost:5000/api/todos', {
+      const res = await fetch('${API_BASE_URL}/todos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ todotext: text }),
@@ -47,7 +50,7 @@ function App() {
   const toggleComplete = async (id, currentStatus) => {
     try {
       // Send PUT request to update the completed status
-      const res = await fetch(`http://localhost:5000/api/todos/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/todos/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({completed: !currentStatus}),
@@ -68,7 +71,7 @@ function App() {
 
     try {
       // Send PUT request to update the todo text
-      const res = await fetch(`http://localhost:5000/api/todos/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/todos/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ todotext: newText }),
@@ -87,7 +90,7 @@ function App() {
   const deleteTodo = async (id) => {
     try {
       // Send DELETE request to server
-      await fetch(`http://localhost:5000/api/todos/${id}`, {
+      await fetch(`${API_BASE_URL}/todos/${id}`, {
         method: 'DELETE',
       });
       // Remove the deleted item from state
