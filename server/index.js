@@ -12,7 +12,11 @@ app.use(express.json());
 let todos = [];
 let nextId = 1;
 
+
 //Routes 
+app.get('/', (req, res) => {
+  res.send('Backend server is running');
+});
 
 //GET -- Retrieve all to-do items
 app.get('/api/todos', (req, res) => {
