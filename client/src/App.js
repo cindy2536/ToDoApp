@@ -10,7 +10,7 @@ function App() {
 
 
   const API_BASE_URL = process.env.REACT_APP_API_URL;
-  
+  console.log(API_BASE_URL);
   //Fetch initial todo items from server on first component mount
   useEffect(() => {
     fetch(`${API_BASE_URL}/todos`)
