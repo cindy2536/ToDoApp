@@ -13,7 +13,7 @@ function App() {
   
   //Fetch initial todo items from server on first component mount
   useEffect(() => {
-    fetch('${API_BASE_URL}/todos')
+    fetch(`${API_BASE_URL}/todos`)
       //Check HTTP status code before parsing JSON to catch server errors like 404 or 500
       .then(res => {
         if (!res.ok) {
@@ -33,7 +33,7 @@ function App() {
 
     try {
       //Send POST request to server to create a new todo
-      const res = await fetch('${API_BASE_URL}/todos', {
+      const res = await fetch(`${API_BASE_URL}/todos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ todotext: text }),
