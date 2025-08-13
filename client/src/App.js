@@ -7,13 +7,16 @@ import TodoList from './components/TodoList';
 function App() {
   //State variable to store the list of todo items
   const [todoItems, setTodoItems] = useState([]);
+  
+  //If no such local runtime loaded config.js, will use http://localhost:5000/api as the default values.
+  const API_BASE_URL = window._env_?.API_BASE_URL || "http://localhost:5000/api";
 
-
-  const API_BASE_URL = process.env.REACT_APP_API_URL;
   console.log(API_BASE_URL);
   //Fetch initial todo items from server on first component mount
   useEffect(() => {
     fetch(`${API_BASE_URL}/todos`)
+    
+
       //Check HTTP status code before parsing JSON to catch server errors like 404 or 500
       .then(res => {
         if (!res.ok) {
@@ -25,7 +28,8 @@ function App() {
       .then((data) => setTodoItems(data))
       //Catch any network or parsing errors
       .catch((err) => console.error("Error loading todos:", err));
-  }, []);
+      console.log("Fetch URL:", `${API_BASE_URL}/todos`);
+  }, [API_BASE_URL]);
 
   //Add a new to-do item
   const addTodo = async (text) => {

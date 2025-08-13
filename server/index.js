@@ -33,7 +33,7 @@ app.post('/api/todos', (req, res) => {
   }
 
   //Create a new to-do item and store
-  const newTodo = {id: nextId++, todotext, completed};
+    const newTodo = {id: nextId++, todotext, completed};
   todos.push(newTodo);
   res.status(201).json(newTodo);
 });
@@ -68,5 +68,5 @@ app.delete('/api/todos/:id', (req, res) => {
 
 //Start the server and listen on the specified port
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port${PORT}`);
 });
